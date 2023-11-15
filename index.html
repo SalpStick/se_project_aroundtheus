@@ -10,12 +10,19 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible" />
     <title>Around the U.S.</title>
     <link href="./pages/index.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="./vendor/fonts/Inter-Medium.woff" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
+      rel="preconnect"
+      href="./vendor/fonts/Inter-Medium.woff2"
+      crossorigin
     />
+    <link rel="preconnect" href="./vendor/fonts/Inter-Regular.woff" />
+    <link
+      rel="preconnect"
+      href="./vendor/fonts/Inter-Regular.woff2"
+      crossorigin
+    />
+    <link href="./vendor/fonts.css" rel="stylesheet" />
   </head>
 
   <body class="page">
@@ -36,9 +43,13 @@
             class="profile__picture"
           />
           <div class="profile__content">
-            <h1 class="profile__content_name">Jacques Cousteau</h1>
+            <h1 class="profile__content profile__content_name">
+              Jacques Cousteau
+            </h1>
             <button class="profile__content_edit"></button>
-            <p class="profile__content_description">Explorer</p>
+            <p class="profile__content profile__content_description">
+              Explorer
+            </p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
@@ -110,7 +121,7 @@
             </div>
           </div>
         </div>
-        <p class="footer__copyright">© 2023 Tyler Harris</p>
+        <p class="main__copyright">© 2023 Tyler Harris</p>
       </main>
       <footer class="footer"></footer>
     </div>
