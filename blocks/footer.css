@@ -1,0 +1,21 @@
+/*Styles for footer and copyright*/
+
+.footer {
+  padding: 60px 20px;
+  margin: 0 auto 0 20px;
+}
+
+.footer__content {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 100px 108px 80px;
+}
+
+.footer__copyright {
+  font-family: Inter, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: gray;
+}
