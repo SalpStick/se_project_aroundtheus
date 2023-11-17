@@ -5,6 +5,7 @@
 - Description
 - Figma
 - Images
+- Github
 
 **Description**
 
@@ -17,3 +18,7 @@ This project is made so all the elements are displayed correctly on popular scre
 **Images**
 
 - [Used the images found on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+
+**Github**
+
+-[Link to the Github page](https://github.com/SalpStick/se_project_aroundtheus)
