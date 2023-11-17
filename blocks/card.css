@@ -1,0 +1,38 @@
+.card {
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.card__image {
+  width: 282px;
+  height: 282px;
+}
+
+.card__content {
+  display: flex;
+  color: black;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.card__heart {
+  background: transparent url(../images/heart.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: 0;
+}
+
+.card__title {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29.05px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
