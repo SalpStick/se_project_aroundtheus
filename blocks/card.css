@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
 .card__heart {
@@ -28,6 +29,10 @@
   border: 0;
 }
 
+.card__heart:hover {
+  background: transparent url(../images/heart-hover.svg) center no-repeat;
+  cursor: pointer;
+}
 .card__title {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 900;
