@@ -1,24 +1,26 @@
 /*All Styling for the top of page*/
 .header {
-  border: 1px;
   max-width: 880px;
+  width: 90%;
   margin: 45px auto;
 }
 
-@media screen and (max-width: 320px) {
+.header__logo {
+  width: 880px;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 900px) {
   .header {
-    padding-left: 20px;
     margin-left: auto;
     margin-right: auto;
   }
   .header__logo {
-    width: 320px;
-    height: 56px;
-    top: 28px;
-    left: 30px;
-    border: 1px;
-
-    margin-left: auto;
-    margin-right: auto;
+    width: 90%;
+    overflow: hidden;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }

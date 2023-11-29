@@ -18,8 +18,6 @@
   padding: 20px;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: nowrap;
-  text-overflow: ellipsis;
 }
 
 .card__heart {
@@ -40,4 +38,5 @@
   line-height: 29.05px;
   margin-top: 0;
   margin-bottom: 0;
+  text-overflow: ellipsis;
 }
