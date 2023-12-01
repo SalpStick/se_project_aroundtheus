@@ -7,7 +7,6 @@
   display: grid;
   grid-template-areas: "copyright copyright copyright";
   grid-template-columns: repeat(auto-fit, 282px);
-  justify-content: center;
 }
 
 .footer__copyright {
@@ -18,7 +17,23 @@
   letter-spacing: 0em;
   text-align: left;
   color: #545454;
-  margin: 20px auto 0 0;
+  margin: 0 auto 0 0;
   grid-area: copyright;
   max-width: 282px;
+}
+
+@media screen and (max-width: 900px) {
+  .footer {
+    display: grid;
+    grid-template-areas: "copyright copyright";
+    grid-template-columns: repeat(auto-fit, 282px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    display: grid;
+    grid-template-areas: "copyright";
+    grid-template-columns: auto-fit, 282px;
+  }
 }

@@ -82,7 +82,7 @@
     grid-template-areas:
       "title button"
       "description description";
-    grid-template-columns: minmax(auto, 373px) auto;
+    grid-template-columns: auto auto;
     width: 90%;
     margin: 20px auto 20px auto;
   }
@@ -90,6 +90,7 @@
   .name {
     grid-area: title;
     text-wrap: nowrap;
+    margin-left: auto;
   }
 
   .description {
