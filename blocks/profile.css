@@ -29,7 +29,9 @@
   line-height: 48px;
   grid-area: title;
   margin: 0;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .description {
@@ -41,7 +43,10 @@
   grid-area: description;
   margin-top: 0;
   margin-bottom: 0;
+  max-width: 373px;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .profile__add-button {

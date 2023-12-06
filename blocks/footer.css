@@ -24,16 +24,16 @@
 
 @media screen and (max-width: 900px) {
   .footer {
-    display: grid;
     grid-template-areas: "copyright copyright";
     grid-template-columns: repeat(auto-fit, 282px);
+    padding-left: 20px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .footer {
-    display: grid;
     grid-template-areas: "copyright";
     grid-template-columns: auto-fit, 282px;
+    padding-left: 20px;
   }
 }
