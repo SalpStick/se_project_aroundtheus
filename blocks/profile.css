@@ -29,9 +29,10 @@
   line-height: 48px;
   grid-area: title;
   margin: 0;
+  display: inline-block;
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .description {
@@ -44,9 +45,10 @@
   margin-top: 0;
   margin-bottom: 0;
   max-width: 373px;
+  display: inline-block;
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile__add-button {
@@ -64,6 +66,9 @@
   height: 24px;
   border: 1px solid white;
   grid-area: button;
+  display: block;
+  margin-top: 1em;
+  margin-left: 1em;
 }
 
 .profile__add-button:hover {
@@ -96,6 +101,11 @@
     grid-area: title;
     text-wrap: nowrap;
     margin-left: auto;
+  }
+
+  .edit {
+    margin-top: 2em;
+    margin-left: 0;
   }
 
   .description {

@@ -31,6 +31,7 @@
   background: transparent url(../images/heart-hover.svg) center no-repeat;
   cursor: pointer;
 }
+
 .card__title {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 900;
