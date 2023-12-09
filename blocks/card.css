@@ -28,8 +28,8 @@
 }
 
 .card__heart:hover {
-  background: transparent url(../images/heart-hover.svg) center no-repeat;
   cursor: pointer;
+  opacity: 50%;
 }
 
 .card__title {

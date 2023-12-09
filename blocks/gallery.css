@@ -7,3 +7,9 @@
   margin: 60px auto 0;
   padding: 0;
 }
+
+@media screen and (max-width: 600px) {
+  .gallery {
+    margin-top: 40px;
+  }
+}
