@@ -21,4 +21,4 @@ This project is made so all the elements are displayed correctly on popular scre
 
 **Github**
 
--[Link to the Github page](https://SalpStick.se_project_aroundtheus.github.io)
+-[Link to the Github page](https://salpstick.github.io/se_project_aroundtheus/)
