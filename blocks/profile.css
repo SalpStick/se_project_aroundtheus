@@ -21,7 +21,7 @@
   grid-template-columns: minmax(auto, 373px) auto;
 }
 
-.name {
+.profile__name {
   color: white;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 42px;
@@ -36,7 +36,7 @@
   padding: 0;
 }
 
-.description {
+.profile__description {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -63,7 +63,7 @@
   padding: 0;
 }
 
-.edit {
+.profile__edit {
   background: transparent url(../images/edit.svg) center no-repeat;
   width: 24px;
   height: 24px;
@@ -78,7 +78,7 @@
   opacity: 60%;
 }
 
-.edit:hover {
+.profile__edit:hover {
   cursor: pointer;
   opacity: 60%;
 }
@@ -99,7 +99,7 @@
     grid-gap: 10px;
   }
 
-  .name {
+  .profile__name {
     grid-area: title;
     text-wrap: nowrap;
     margin: 0 auto 0 0;
@@ -108,13 +108,13 @@
     text-align: right;
   }
 
-  .edit {
+  .profile__edit {
     max-width: 24px;
     height: 18px;
     width: 18px;
   }
 
-  .description {
+  .profile__description {
     font-size: 14px;
     line-height: 17px;
     text-align: center;
@@ -127,6 +127,6 @@
   }
 
   .profile__picture {
-    margin: 0 auto 10px auto;
+    margin: 0 auto 20px auto;
   }
 }
