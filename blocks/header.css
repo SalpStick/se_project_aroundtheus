@@ -2,27 +2,27 @@
 .header {
   max-width: 880px;
   width: 100%;
-  height: 56px;
+  height: 74px;
   margin: 0 auto 0 auto;
+  padding-top: 45px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 .header__logo {
-  max-width: 173px;
-  max-height: 33px;
-  height: 100%;
-  width: 100%;
-  margin: 45px auto 40px auto;
-  padding: 0 20px;
+  width: 173px;
+  height: 33px;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 600px) {
   .header {
     padding-top: 28px;
+    height: 56px;
   }
   .header__logo {
-    max-width: 126px;
-    max-height: 24px;
+    width: 126px;
+    height: 24px;
     margin: 0;
+    padding-left: 20px;
   }
 }

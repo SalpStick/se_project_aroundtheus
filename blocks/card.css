@@ -40,4 +40,5 @@
   margin-top: 0;
   margin-bottom: 0;
   text-overflow: ellipsis;
+  max-width: 219px;
 }

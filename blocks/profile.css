@@ -87,6 +87,7 @@
   .profile {
     flex-direction: column;
     max-height: 286px;
+    max-width: 282px;
   }
 
   .profile__content {
