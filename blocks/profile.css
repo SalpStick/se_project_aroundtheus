@@ -107,6 +107,7 @@
     font-size: 22px;
     line-height: 27px;
     text-align: right;
+    max-width: 100%;
   }
 
   .profile__edit {
@@ -120,6 +121,7 @@
     line-height: 17px;
     text-align: center;
     margin: 0 auto 20px auto;
+    max-width: 100%;
   }
 
   .profile__add-button {
