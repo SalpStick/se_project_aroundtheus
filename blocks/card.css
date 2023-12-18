@@ -39,6 +39,8 @@
   line-height: 29.05px;
   margin-top: 0;
   margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
   max-width: 219px;
 }
