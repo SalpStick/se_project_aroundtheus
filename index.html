@@ -30,7 +30,11 @@
           />
           <div class="profile__content">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button type="button" class="profile__edit"></button>
+            <button
+              type="button"
+              id="profile-edit-button"
+              class="profile__edit"
+            ></button>
             <p class="profile__description">Explorer</p>
           </div>
           <button type="button" class="profile__add-button"></button>
@@ -109,9 +113,9 @@
       </footer>
     </div>
 
-    <div class="model">
+    <div class="model" id="profile-edit-model">
       <div class="model__container">
-        <button class="model__close"></button>
+        <button class="model__close" id="profile-close-button"></button>
         <p class="model__heading">Edit Profile</p>
         <form class="model__form">
           <input class="model__input" type="text" name="Name" />
