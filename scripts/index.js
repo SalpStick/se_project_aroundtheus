@@ -47,7 +47,7 @@ const profileEditForm = profileEditModel.querySelector(".model__form");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-const cardListEl = document.querySelector(".card__list");
+const cardListEl = document.querySelector(".cards__list");
 /*------- Functions --------*/
 
 function closePopup() {
