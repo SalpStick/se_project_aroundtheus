@@ -40,72 +40,7 @@
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="gallery page__section">
-          <div class="card">
-            <img
-              src="./images/yosemite.jpg"
-              alt="Yosemite Valley Picture"
-              class="card__image"
-            />
-            <div class="card__content">
-              <h2 class="card__title">Yosemit Valley</h2>
-              <button type="button" class="card__heart"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/lake-louise.jpg"
-              alt="Lake Louise Picture"
-              class="card__image"
-            />
-            <div class="card__content">
-              <h2 class="card__title">Lake Louise</h2>
-              <button type="button" class="card__heart"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/bald-mountains.jpg"
-              alt="Bald Mountains Picture"
-              class="card__image"
-            />
-            <div class="card__content">
-              <h2 class="card__title">Bald Mountains</h2>
-              <button type="button" class="card__heart"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/latemar.jpg"
-              alt="Latemar Picture"
-              class="card__image"
-            />
-            <div class="card__content">
-              <h2 class="card__title">Latemar</h2>
-              <button type="button" class="card__heart"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/vanoise.jpg"
-              alt="Vanoise Picture"
-              class="card__image"
-            />
-            <div class="card__content">
-              <h2 class="card__title">Vanoise National Park</h2>
-              <button type="button" class="card__heart"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/lago.jpg"
-              alt="Lago di Braies Picture"
-              class="card__image"
-            />
-            <div class="card__content">
-              <h2 class="card__title">Lago</h2>
-              <button type="button" class="card__heart"></button>
-            </div>
-          </div>
+          <ul class="card__list"></ul>
         </section>
       </main>
       <footer class="footer">
@@ -118,12 +53,32 @@
         <button class="model__close" id="profile-close-button"></button>
         <p class="model__heading">Edit Profile</p>
         <form class="model__form">
-          <input class="model__input" type="text" name="Name" />
-          <input class="model__input" type="text" name="About me" />
+          <input
+            class="model__input"
+            type="text"
+            id="profile-title-input"
+            name="Name"
+          />
+          <input
+            class="model__input"
+            type="text"
+            id="profile-description-input"
+            name="About me"
+          />
           <button class="model__button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="card-template">
+      <div class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__content">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__heart"></button>
+        </div>
+      </div>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>
