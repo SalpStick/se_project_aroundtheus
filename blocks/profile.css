@@ -71,6 +71,8 @@
   grid-area: button;
   display: block;
   padding: 0;
+  margin-left: 18px;
+  margin-top: 15px;
 }
 
 .profile__add-button:hover {
@@ -114,6 +116,8 @@
     max-width: 24px;
     height: 18px;
     width: 18px;
+    margin-top: 4px;
+    margin-left: 10px;
   }
 
   .profile__description {
