@@ -33,10 +33,13 @@ const initialCards = [
 /*------- Elements --------*/
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
+const addCardBtn = document.querySelector(".profile__add-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
+const addCardModal = document.querySelector("#add-card-modal");
 const profileEditClose = profileEditModal.querySelector(
   "#profile-close-button"
 );
+const addCardClose = addCardModal.querySelector("#add-close-button");
 const profileTitle = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -51,8 +54,12 @@ const cardListEl = document.querySelector(".cards__list");
 
 /*------- Functions --------*/
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+}
+
+function openPopup(modal) {
+  modal.classList.add("modal_opened");
 }
 
 function getCardElement(cardData) {
@@ -72,7 +79,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+  closePopup(profileEditModal);
 }
 
 /*------- Event Listeners --------*/
@@ -80,12 +87,13 @@ function handleProfileEditSubmit(e) {
 profileEditBtn.addEventListener("click", function () {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
+  openPopup(profileEditModal);
 });
-
-profileEditClose.addEventListener("click", closePopup);
-
+profileEditClose.addEventListener("click", () => closePopup(profileEditModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
+addCardBtn.addEventListener("click", () => openPopup(addCardModal));
+addCardClose.addEventListener("click", () => closePopup(addCardModal));
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
