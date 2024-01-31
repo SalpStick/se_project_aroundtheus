@@ -10,10 +10,13 @@
   align-items: center;
   justify-content: center;
   padding: 0 19px;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
 }
 
 .modal_opened {
   display: flex;
+  opacity: 1;
 }
 
 .modal__container {

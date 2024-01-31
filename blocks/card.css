@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   list-style: none;
+  position: relative;
 }
 
 .card__image {
@@ -18,6 +19,21 @@
   padding: 20px;
   align-items: center;
   justify-content: space-between;
+}
+
+.card__trash {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background: transparent url(../images/Trash.svg) center no-repeat;
+  border: 0;
+  width: 18px;
+  height: 19.3px;
+}
+
+.card__title:hover {
+  cursor: pointer;
+  opacity: 50%;
 }
 
 .card__heart {
