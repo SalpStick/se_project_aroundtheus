@@ -160,6 +160,10 @@
     padding: 25px 22px 25px 22px;
   }
 
+  .modal__button {
+    margin-top: 16px;
+  }
+
   .modal__container_image {
     margin: 0 45px;
   }

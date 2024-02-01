@@ -83,6 +83,7 @@ function getCardElement(cardData) {
   cardImageEl.addEventListener("click", function () {
     imageSource.src = cardData.link;
     imageTitle.textContent = cardData.name;
+    imageSource.alt = cardData.name;
     console.log(imageSource.textContent);
     openPopup(imageModal);
   });
@@ -114,6 +115,8 @@ function handleAddCardSubmit(e) {
   const link = cardUrlInput.value;
 
   renderCard({ name, link }, cardListEl);
+
+  addCardForm.reset();
   closePopup(addCardModal);
 }
 
