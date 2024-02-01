@@ -148,6 +148,8 @@
   font-weight: 400;
   line-height: normal;
   margin-top: 10px;
+  height: 12px;
+  width: 291px;
 }
 
 @media screen and (max-width: 715px) {
@@ -166,5 +168,10 @@
 
   .modal__container_image {
     margin: 0 45px;
+  }
+
+  .modal__title {
+    height: 12px;
+    width: 240px;
   }
 }
