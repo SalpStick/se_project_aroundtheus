@@ -47,6 +47,25 @@
   opacity: 75%;
 }
 
+.modal__close_image {
+  background-image: url(../images/close-icon.svg);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+}
+
+.modal__close_image:hover {
+  cursor: pointer;
+  opacity: 75%;
+}
+
 .modal__heading {
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 24px;
@@ -108,10 +127,10 @@
 }
 
 .modal__container_image {
-  max-width: 75vw;
+  max-width: 75vh;
   width: 100%;
   max-height: 75vh;
-  height: 100%;
+  height: auto;
   position: relative;
 }
 
@@ -139,5 +158,9 @@
 
   .modal__container {
     padding: 25px 22px 25px 22px;
+  }
+
+  .modal__container_image {
+    margin: 0 45px;
   }
 }
