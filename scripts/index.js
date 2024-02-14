@@ -40,6 +40,7 @@ const profileEditContainer =
   profileEditModal.querySelector(".modal__container");
 const addCardContainer = addCardModal.querySelector(".modal__container");
 const imageModal = document.querySelector("#image-modal");
+const imageContainer = imageModal.querySelector(".modal__container_image");
 const profileEditClose = profileEditModal.querySelector(
   "#profile-close-button"
 );
@@ -234,5 +235,11 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /*------- Image Popup --------*/
 imageClose.addEventListener("click", () => closePopup(imageModal));
+imageModal.addEventListener("click", (evt) =>
+  closeModalOutside(imageModal, imageContainer, evt)
+);
+document.addEventListener("keydown", (evt) =>
+  closeModalEscape(imageModal, evt)
+);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
