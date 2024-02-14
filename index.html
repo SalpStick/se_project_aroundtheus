@@ -62,15 +62,23 @@
             class="modal__input modal__input_type_name"
             type="text"
             id="profile-title-input"
-            name="Name"
+            name="Name" 
+            required
+            minlength="2"
+            maxlength="40"
           />
+          <span id="profile-title-input-error" class="modal__error"></span><br>
           <input
             class="modal__input modal__input_type_description"
             type="text"
             id="profile-description-input"
             name="About me"
+            required
+            minlength="2"
+            maxlength="200"
           />
-          <button type="submit" class="modal__button">Save</button>
+          <span id="profile-description-input-error" class="modal__error"></span><br>
+          <button type="submit" class="modal__button" disabled>Save</button>
         </form>
       </div>
     </div>
@@ -90,14 +98,21 @@
             type="text"
             id="add-title-input"
             name="title"
+            required
+            minlength="1"
+            maxlength="30"
           />
+          <span id="add-title-input-error" class="modal__error"></span><br>
           <input
             class="modal__input modal__input_type_url"
-            type="text"
+            type="url"
             id="add-url-input"
             name="url"
+            pattern=".*\.myco\..*"
+            required
           />
-          <button type="submit" class="modal__button">Save</button>
+          <span id="add-url-input-error" class="modal__error"></span><br>
+          <button type="submit" class="modal__button" disabled>Save</button>
         </form>
       </div>
     </div>
