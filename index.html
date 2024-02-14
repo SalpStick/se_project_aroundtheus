@@ -62,22 +62,22 @@
             class="modal__input modal__input_type_name"
             type="text"
             id="profile-title-input"
-            name="Name" 
+            name="name" 
             required
             minlength="2"
             maxlength="40"
           />
-          <span id="profile-title-input-error" class="modal__error"></span><br>
+          <span id="profile-title-input-error" class="modal__error modal__error_disabled"></span><br>
           <input
             class="modal__input modal__input_type_description"
             type="text"
             id="profile-description-input"
-            name="About me"
+            name="description"
             required
             minlength="2"
             maxlength="200"
           />
-          <span id="profile-description-input-error" class="modal__error"></span><br>
+          <span id="profile-description-input-error" class="modal__error modal__error_disabled"></span><br>
           <button type="submit" class="modal__button" disabled>Save</button>
         </form>
       </div>
@@ -102,16 +102,16 @@
             minlength="1"
             maxlength="30"
           />
-          <span id="add-title-input-error" class="modal__error"></span><br>
+          <span id="add-title-input-error" class="modal__error modal__error_disabled"></span><br>
           <input
             class="modal__input modal__input_type_url"
             type="url"
             id="add-url-input"
             name="url"
-            pattern=".*\.myco\..*"
             required
+            pattern=".*\.myco\..*"
           />
-          <span id="add-url-input-error" class="modal__error"></span><br>
+          <span id="add-url-input-error" class="modal__error modal__error_disabled"></span><br>
           <button type="submit" class="modal__button" disabled>Save</button>
         </form>
       </div>

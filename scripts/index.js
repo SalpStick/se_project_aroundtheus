@@ -64,9 +64,7 @@ const cardListEl = document.querySelector(".cards__list");
 
 /*------- Validation -------*/
 
-function enableValidation(modal) {
-  var firstInput = modal.querySelector(".modal__input");
-  var secondInput = modal.querySelector(".modal__input");
+function enableValidation(modal, firstInput, secondInput) {
   var submitButton = modal.querySelector(".modal__button");
 
   //if either either inputs are not filled in yet it breaks the function
@@ -83,11 +81,15 @@ function enableValidation(modal) {
     submitButton.setAttribute("disabled", true);
     submitButton.classList.remove("modal__button_enabled");
     showErrorMessage(modal, firstInput);
+  } else {
+    hideErrorMessage(modal, firstInput);
   }
   if (!secondInput.checkValidity()) {
     submitButton.setAttribute("disabled", true);
     submitButton.classList.remove("modal__button_enabled");
     showErrorMessage(modal, secondInput);
+  } else {
+    hideErrorMessage(modal, secondInput);
   }
 }
 
@@ -115,8 +117,14 @@ function openPopup(modal) {
 
 function showErrorMessage(modal, inputEl) {
   const errorMessageEl = modal.querySelector("#" + inputEl.id + "-error");
-  errorMessageEl.classList.add("modal__button_enabled");
+  errorMessageEl.classList.remove("modal__error_disabled");
   errorMessageEl.textContent = inputEl.validationMessage;
+  console.log("here");
+}
+
+function hideErrorMessage(modal, inputEl) {
+  const errorMessageEl = modal.querySelector("#" + inputEl.id + "-error");
+  errorMessageEl.classList.add("modal__error_disabled");
 }
 
 function getCardElement(cardData) {
@@ -194,10 +202,10 @@ document.addEventListener("keydown", (evt) =>
   closeModalEscape(profileEditModal, evt)
 );
 profileTitleInput.addEventListener("input", () =>
-  enableValidation(profileEditModal)
+  enableValidation(profileEditModal, profileTitleInput, profileDescriptionInput)
 );
 profileDescriptionInput.addEventListener("input", () =>
-  enableValidation(profileEditModal)
+  enableValidation(profileEditModal, profileTitleInput, profileDescriptionInput)
 );
 profileEditBtn.addEventListener("click", function () {
   profileTitleInput.value = profileTitle.textContent;
@@ -214,8 +222,12 @@ addCardModal.addEventListener("click", (evt) =>
 document.addEventListener("keydown", (evt) =>
   closeModalEscape(addCardModal, evt)
 );
-cardTitleInput.addEventListener("input", () => enableValidation(addCardModal));
-cardUrlInput.addEventListener("input", () => enableValidation(addCardModal));
+cardTitleInput.addEventListener("input", () =>
+  enableValidation(addCardModal, cardTitleInput, cardUrlInput)
+);
+cardUrlInput.addEventListener("input", () =>
+  enableValidation(addCardModal, cardTitleInput, cardUrlInput)
+);
 addCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardClose.addEventListener("click", () => closePopup(addCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
