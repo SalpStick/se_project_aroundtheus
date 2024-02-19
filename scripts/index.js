@@ -83,6 +83,10 @@ function openPopup(modal) {
 
   //makes submit button invalid
   //modal.querySelector(".modal__btn").classList.remove(".modal__button_enabled");
+
+  modal.addEventListener("keydown", (evt) =>
+    closeModalEscape(profileEditModal, evt)
+  );
 }
 
 function getCardElement(cardData) {
@@ -156,15 +160,6 @@ function closeModalEscape(modal, e) {
 profileEditModal.addEventListener("click", (evt) =>
   closeModalOutside(profileEditModal, profileEditContainer, evt)
 );
-document.addEventListener("keydown", (evt) =>
-  closeModalEscape(profileEditModal, evt)
-);
-profileTitleInput.addEventListener("input", () =>
-  enableValidation(profileEditModal, profileTitleInput, profileDescriptionInput)
-);
-profileDescriptionInput.addEventListener("input", () =>
-  enableValidation(profileEditModal, profileTitleInput, profileDescriptionInput)
-);
 profileEditBtn.addEventListener("click", function () {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -176,15 +171,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 /*------- Add Card --------*/
 addCardModal.addEventListener("click", (evt) =>
   closeModalOutside(addCardModal, addCardContainer, evt)
-);
-document.addEventListener("keydown", (evt) =>
-  closeModalEscape(addCardModal, evt)
-);
-cardTitleInput.addEventListener("input", () =>
-  enableValidation(addCardModal, cardTitleInput, cardUrlInput)
-);
-cardUrlInput.addEventListener("input", () =>
-  enableValidation(addCardModal, cardTitleInput, cardUrlInput)
 );
 addCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardClose.addEventListener("click", () => closePopup(addCardModal));

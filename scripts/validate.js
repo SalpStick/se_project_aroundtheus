@@ -1,40 +1,100 @@
-function enableValidation(modal, firstInput, secondInput) {
-  var submitButton = modal.querySelector(".modal__button");
+function showInputError(formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  //inputElement.classList.add("form__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.remove("modal__error_disabled");
+}
 
-  //if either either inputs are not filled in yet it breaks the function
-  if (firstInput === "" || secondInput === "") {
-    return;
-  }
+function hideInputError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  //inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.add("modal__error_disabled");
+  errorElement.textContent = "";
+}
 
-  // Check if both inputs are valid
-  if (firstInput.checkValidity() && secondInput.checkValidity()) {
-    submitButton.removeAttribute("disabled", true);
-    submitButton.classList.add("modal__button_enabled");
-  }
-  if (!firstInput.checkValidity()) {
-    submitButton.setAttribute("disabled", true);
-    submitButton.classList.remove("modal__button_enabled");
-    showErrorMessage(modal, firstInput);
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideErrorMessage(modal, firstInput);
+    hideInputError(formElement, inputElement);
   }
-  if (!secondInput.checkValidity()) {
-    submitButton.setAttribute("disabled", true);
-    submitButton.classList.remove("modal__button_enabled");
-    showErrorMessage(modal, secondInput);
+}
+
+function hasInvalidInput(inputList) {
+  console.log(inputList);
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+const toggleButtonState = (inputList, buttonElement) => {
+  console.log(hasInvalidInput(inputList));
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("button_inactive");
   } else {
-    hideErrorMessage(modal, secondInput);
+    buttonElement.classList.remove("button_inactive");
   }
+};
+
+// function setEventListeners(formElement) {
+//   const inputList = formElement.querySelectorAll(".form__input");
+//   const buttonElement = formElement.querySelector(".form__submit");
+//   console.log("here");
+
+//   toggleButtonState(inputList, buttonElement);
+
+//   inputElement.addEventListener("input", function () {
+//     checkInputValidity(formElement, inputElement);
+//     toggleButtonState(inputList, buttonElement);
+//   });
+
+//   inputList.forEach((inputElement) => {
+//     inputElement.addEventListener("input", function () {
+//       checkInputValidity(formElement, inputElement);
+//       toggleButtonState(inputList, buttonElement);
+//     });
+//   });
+// }
+
+function enableValidation() {
+  const formList = document.querySelectorAll(".modal__form");
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+
+    const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
+    const buttonElement = formElement.querySelector(".modal__button");
+
+    toggleButtonState(inputList, buttonElement);
+
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", function () {
+        checkInputValidity(formElement, inputElement);
+        toggleButtonState(inputList, buttonElement);
+        console.log("2");
+      });
+    });
+
+    // const fieldsetList = formElement.querySelectorAll(".form__set");
+
+    // fieldsetList.forEach((fieldset) => {
+    //   setEventListeners(fieldset);
+    //   console.log("here");
+    // });
+  });
 }
 
-function showErrorMessage(modal, inputEl) {
-  const errorMessageEl = modal.querySelector("#" + inputEl.id + "-error");
-  errorMessageEl.classList.remove("modal__error_disabled");
-  errorMessageEl.textContent = inputEl.validationMessage;
-  console.log("here");
-}
+// enabling validation by calling enableValidation()
+// pass all the settings on call
 
-function hideErrorMessage(modal, inputEl) {
-  const errorMessageEl = modal.querySelector("#" + inputEl.id + "-error");
-  errorMessageEl.classList.add("modal__error_disabled");
-}
+// enableValidation({
+//   formSelector: ".popup__form",
+//   inputSelector: ".popup__input",
+//   submitButtonSelector: ".popup__button",
+//   inactiveButtonClass: "popup__button_disabled",
+//   inputErrorClass: "popup__input_type_error",
+//   errorClass: "popup__error_visible",
+// });
+
+enableValidation();
