@@ -174,7 +174,7 @@ addCardModal.addEventListener("click", (evt) =>
 );
 addCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardClose.addEventListener("click", () => closePopup(addCardModal));
-addCardForm.addEventListener("submit", () => handleAddCardSubmit(evt));
+addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /*------- Image Popup --------*/
 imageClose.addEventListener("click", () => closePopup(imageModal));
