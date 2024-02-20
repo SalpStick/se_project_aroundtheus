@@ -21,18 +21,18 @@ function checkInputValidity(formElement, inputElement) {
 }
 
 function hasInvalidInput(inputList) {
-  console.log(inputList);
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 }
 
 const toggleButtonState = (inputList, buttonElement) => {
-  console.log(hasInvalidInput(inputList));
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.remove("modal__button_enabled");
+    buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.add("modal__button_enabled");
+    buttonElement.removeAttribute("disabled");
   }
 };
 
@@ -59,10 +59,6 @@ const toggleButtonState = (inputList, buttonElement) => {
 function enableValidation() {
   const formList = document.querySelectorAll(".modal__form");
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
-      evt.preventDefault();
-    });
-
     const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
     const buttonElement = formElement.querySelector(".modal__button");
 
@@ -72,7 +68,6 @@ function enableValidation() {
       inputElement.addEventListener("input", function () {
         checkInputValidity(formElement, inputElement);
         toggleButtonState(inputList, buttonElement);
-        console.log("2");
       });
     });
 

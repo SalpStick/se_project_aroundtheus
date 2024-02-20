@@ -174,7 +174,7 @@ addCardModal.addEventListener("click", (evt) =>
 );
 addCardBtn.addEventListener("click", () => openPopup(addCardModal));
 addCardClose.addEventListener("click", () => closePopup(addCardModal));
-addCardForm.addEventListener("submit", handleAddCardSubmit);
+addCardForm.addEventListener("submit", () => handleAddCardSubmit(evt));
 
 /*------- Image Popup --------*/
 imageClose.addEventListener("click", () => closePopup(imageModal));
@@ -185,4 +185,5 @@ document.addEventListener("keydown", (evt) =>
   closeModalEscape(imageModal, evt)
 );
 
+handleProfileEditSubmit;
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
