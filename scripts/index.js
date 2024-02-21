@@ -71,11 +71,7 @@ function closePopup(modal) {
   //makes submit button invalid
   //modal.querySelector(".modal__btn").classList.remove(".modal__button_enabled");
 
-  modal.removeEventListener("keydown", function (evt) {
-    if (evt.key === "esc") {
-      closePopup(modal);
-    }
-  });
+  modal.removeEventListener("keydown", (evt) => closeModalEscape(modal, evt));
 }
 
 function openPopup(modal) {
@@ -84,9 +80,7 @@ function openPopup(modal) {
   //makes submit button invalid
   //modal.querySelector(".modal__btn").classList.remove(".modal__button_enabled");
 
-  modal.addEventListener("keydown", (evt) =>
-    closeModalEscape(profileEditModal, evt)
-  );
+  document.addEventListener("keydown", (evt) => closeModalEscape(modal, evt));
 }
 
 function getCardElement(cardData) {
@@ -180,9 +174,6 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 imageClose.addEventListener("click", () => closePopup(imageModal));
 imageModal.addEventListener("click", (evt) =>
   closeModalOutside(imageModal, imageContainer, evt)
-);
-document.addEventListener("keydown", (evt) =>
-  closeModalEscape(imageModal, evt)
 );
 
 handleProfileEditSubmit;

@@ -1,22 +1,27 @@
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(formElement, inputElement, errorMessage, options) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  //inputElement.classList.add("form__input_type_error");
+  inputElement.classList.add(options.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.remove("modal__error_disabled");
+  errorElement.classList.remove(options.errorClass);
 }
 
-function hideInputError(formElement, inputElement) {
+function hideInputError(formElement, inputElement, options) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  //inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.add("modal__error_disabled");
+  inputElement.classList.remove(options.inputErrorClass);
+  errorElement.classList.add(options.errorClass);
   errorElement.textContent = "";
 }
 
-function checkInputValidity(formElement, inputElement) {
+function checkInputValidity(formElement, inputElement, options) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      options
+    );
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, options);
   }
 }
 
@@ -26,12 +31,12 @@ function hasInvalidInput(inputList) {
   });
 }
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, options) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.remove("modal__button_enabled");
+    buttonElement.classList.remove(options.inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
   } else {
-    buttonElement.classList.add("modal__button_enabled");
+    buttonElement.classList.add(options.inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
   }
 };
@@ -56,18 +61,22 @@ const toggleButtonState = (inputList, buttonElement) => {
 //   });
 // }
 
-function enableValidation() {
-  const formList = document.querySelectorAll(".modal__form");
+function enableValidation(options) {
+  const formList = document.querySelectorAll(options.formSelector);
   formList.forEach((formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
-    const buttonElement = formElement.querySelector(".modal__button");
+    const inputList = Array.from(
+      formElement.querySelectorAll(options.inputSelector)
+    );
+    const buttonElement = formElement.querySelector(
+      options.submitButtonSelector
+    );
 
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement, options);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", function () {
-        checkInputValidity(formElement, inputElement);
-        toggleButtonState(inputList, buttonElement);
+        checkInputValidity(formElement, inputElement, options);
+        toggleButtonState(inputList, buttonElement, options);
       });
     });
 
@@ -83,13 +92,13 @@ function enableValidation() {
 // enabling validation by calling enableValidation()
 // pass all the settings on call
 
-// enableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "popup__button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible",
-// });
+const options = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_enabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_disabled",
+};
 
-enableValidation();
+enableValidation(options);
