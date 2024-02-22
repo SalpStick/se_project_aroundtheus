@@ -71,7 +71,7 @@ function closePopup(modal) {
   //makes submit button invalid
   //modal.querySelector(".modal__btn").classList.remove(".modal__button_enabled");
 
-  modal.removeEventListener("keydown", closeModalEscape);
+  document.removeEventListener("keydown", closeModalEscape);
 }
 
 function openPopup(modal) {
