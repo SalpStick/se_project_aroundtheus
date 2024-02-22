@@ -206,4 +206,9 @@
     height: 12px;
     width: 240px;
   }
+
+  .modal__heading {
+    height: 22px;
+    font-size: 18px;
+  }
 }
