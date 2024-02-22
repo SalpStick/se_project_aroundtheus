@@ -71,7 +71,7 @@ function closePopup(modal) {
   //makes submit button invalid
   //modal.querySelector(".modal__btn").classList.remove(".modal__button_enabled");
 
-  modal.removeEventListener("keydown", (evt) => closeModalEscape(modal, evt));
+  modal.removeEventListener("keydown", closeModalEscape);
 }
 
 function openPopup(modal) {
@@ -80,7 +80,7 @@ function openPopup(modal) {
   //makes submit button invalid
   //modal.querySelector(".modal__btn").classList.remove(".modal__button_enabled");
 
-  document.addEventListener("keydown", (evt) => closeModalEscape(modal, evt));
+  document.addEventListener("keydown", closeModalEscape);
 }
 
 function getCardElement(cardData) {
@@ -142,8 +142,9 @@ function closeModalOutside(modal, form, e) {
   }
 }
 
-function closeModalEscape(modal, e) {
+function closeModalEscape(e) {
   if (e.key === "Escape") {
+    const modal = document.querySelector(".modal_opened");
     closePopup(modal);
   }
 }
@@ -176,5 +177,4 @@ imageModal.addEventListener("click", (evt) =>
   closeModalOutside(imageModal, imageContainer, evt)
 );
 
-handleProfileEditSubmit;
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
