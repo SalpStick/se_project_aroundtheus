@@ -184,6 +184,8 @@
   .modal__close {
     left: calc(100% - 40px);
     bottom: calc(100% + 50px);
+    max-width: 26px;
+    max-height: 26px;
   }
 
   .modal__container {
@@ -192,6 +194,8 @@
 
   .modal__button {
     margin-top: 16px;
+    font-size: 14px;
+    height: 46px;
   }
 
   .modal__container_image {
