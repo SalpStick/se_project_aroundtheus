@@ -31,7 +31,7 @@
   height: 19.3px;
 }
 
-.card__title:hover {
+.card__trash:hover {
   cursor: pointer;
   opacity: 50%;
 }

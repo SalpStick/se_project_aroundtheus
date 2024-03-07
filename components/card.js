@@ -1,42 +1,53 @@
 export default class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
-    console.log("1");
+    this._handleImageClick = handleImageClick;
+  }
+
+  _getTemplate() {
+    return document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+  }
+
+  getView() {
+    this._cardElement = this._getTemplate();
+
+    this._likeButton = this._cardElement.querySelector(".card__heart");
+    this._trashButton = this._cardElement.querySelector(".card__trash");
+
+    this._cardTitleEl = this._cardElement.querySelector(".card__title");
+    this._cardImageEl = this._cardElement.querySelector(".card__image");
+
+    this._cardTitleEl.textContent = this._name;
+    this._cardImageEl.src = this._link;
+    this._cardImageEl.alt = this._name;
+
+    this._setEventListeners();
+
+    return this._cardElement;
   }
 
   _setEventListeners() {
     //like button
-    this._cardElement
-      .querySelector(".card__heart")
-      .addEventListener("click", () => this._handleLikeBtn);
+    this._likeButton.addEventListener("click", () => this._handleLikeBtn());
 
-    this._cardElement
-      .querySelector(".card__trash")
-      .addEventListener("click", () => this._handleDelete);
+    this._trashButton.addEventListener("click", () => this._handleDelete());
+
+    this._cardImageEl.addEventListener("click", () =>
+      this._handleImageClick(this._name, this._link)
+    );
   }
 
   _handleLikeBtn() {
-    this._cardElement
-      .querySelector(".card__heart")
-      .classList.toggle("card__heart_active");
+    this._likeButton.classList.toggle("card__heart_active");
   }
 
   _handleDelete() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-
-  getView() {
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
-    this._setEventListeners();
-
-    console.log("2");
-
-    return this._cardElement;
   }
 }
