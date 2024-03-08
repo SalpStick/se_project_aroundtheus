@@ -1,4 +1,5 @@
-import Card from "../components/card.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -71,6 +72,21 @@ const cardListEl = document.querySelector(".cards__list");
 
 const cardSelector = "#card-template";
 
+const validationOptions = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_disabled",
+  inactiveButtonClass: "modal__button_enabled",
+  submitButtonSelector: ".modal__button",
+};
+
+const editFormValidator = new FormValidator(validationOptions, profileEditForm);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(validationOptions, addCardForm);
+addFormValidator.enableValidation();
+
 /*------- Functions --------*/
 
 function closePopup(modal) {
@@ -108,6 +124,8 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
 
+  editFormValidator.disableSubmitButton();
+
   closePopup(profileEditModal);
 }
 
@@ -118,6 +136,8 @@ function handleAddCardSubmit(e) {
 
   renderCard({ name, link }, cardListEl, handleImageClick);
   addCardForm.reset();
+
+  addFormValidator.disableSubmitButton();
 
   closePopup(addCardModal);
 }
