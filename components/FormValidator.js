@@ -10,7 +10,6 @@ export default class FormValidator {
   }
 
   _showInputError(inputElement) {
-    console.log("here");
     this._errorElement = this._formElement.querySelector(
       `#${inputElement.id}-error`
     );
@@ -23,7 +22,6 @@ export default class FormValidator {
     this._errorElement = this._formElement.querySelector(
       `#${inputElement.id}-error`
     );
-    console.log(this._inputErrorClass);
     inputElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.add(this._errorClass);
     this._errorElement.textContent = "";
@@ -39,14 +37,14 @@ export default class FormValidator {
 
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
-      !inputElement.validity.valid;
+      return !inputElement.validity.valid;
     });
   }
 
   _toggleButtonState = () => {
-    if (this._hasInvalidInput(this._inputList)) {
+    if (!this._hasInvalidInput(this._inputList)) {
       this._submitButton.classList.remove(this._inactiveButtonClass);
-      this._submitButton.setAttribute("disabled", true);
+      this._submitButton.removeAttribute("disabled", true);
     } else {
       this.disableSubmitButton();
     }
@@ -78,12 +76,14 @@ export default class FormValidator {
 
   disableSubmitButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
-    this._submitButton.removeAttribute("disabled");
+    this._submitButton.setAttribute("disabled", true);
   }
 
-  reset() {
-    this._inputList.forEach((_inputElement) => {
-      _inputElement.textContent = "";
+  resetValidation() {
+    this._inputList.forEach((inputElement) => {
+      inputElement.textContent = "";
     });
+
+    this._toggleButtonState();
   }
 }

@@ -77,7 +77,7 @@ const validationOptions = {
   inputSelector: ".modal__input",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_disabled",
-  inactiveButtonClass: "modal__button_enabled",
+  inactiveButtonClass: "modal__button_disabled",
   submitButtonSelector: ".modal__button",
 };
 
@@ -135,7 +135,7 @@ function handleAddCardSubmit(e) {
   const link = cardUrlInput.value;
 
   renderCard({ name, link }, cardListEl, handleImageClick);
-  addCardForm.reset();
+  addCardForm.resetValidation();
 
   addFormValidator.disableSubmitButton();
 
