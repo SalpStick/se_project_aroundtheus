@@ -135,7 +135,7 @@ function handleAddCardSubmit(e) {
   const link = cardUrlInput.value;
 
   renderCard({ name, link }, cardListEl, handleImageClick);
-  addCardForm.resetValidation();
+  addFormValidator.resetValidation();
 
   addFormValidator.disableSubmitButton();
 

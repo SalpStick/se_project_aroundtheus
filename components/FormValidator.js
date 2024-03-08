@@ -80,9 +80,7 @@ export default class FormValidator {
   }
 
   resetValidation() {
-    this._inputList.forEach((inputElement) => {
-      inputElement.textContent = "";
-    });
+    this._formElement.reset();
 
     this._toggleButtonState();
   }
