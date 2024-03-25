@@ -23,7 +23,7 @@ const currentUserInfo = new UserInfo(
 );
 
 const imageModal = new PopupWithImage(selectors.imageModal);
-const addCard = new PopupWithForm(
+const addCardModal = new PopupWithForm(
   selectors.addCardForm,
   handleAddCardFormSubmit
 );
@@ -51,7 +51,7 @@ const enableValidation = (selectors) => {
 cardSection.renderItems(initialCards);
 enableValidation(selectors);
 profileEdit.setEventListeners();
-addCard.setEventListeners();
+addCardModal.setEventListeners();
 imageModal.setEventListeners();
 
 function updateUserInfo({ name, description }) {
@@ -81,35 +81,34 @@ function handleImageClick(imgData) {
   imageModal.open(imgData);
 }
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  const { name, description } = profileEdit.formValues;
+function handleProfileFormSubmit(e) {
+  e.preventDefault();
   updateUserInfo(profileEdit.formValues);
 
   profileEdit.close();
-  formValidators["profile-edit-form"].resetValidation();
 }
 
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
+function handleAddCardFormSubmit(e) {
+  e.preventDefault();
 
-  const { title: name, link } = addCard.formValues;
+  const { title: name, link } = addCardModal.formValues;
 
   const cardElement = createCard({ name, link });
   cardSection.addItem(cardElement);
 
-  addCard.resetForm();
-  formValidators["add-card-form"].resetValidation();
-  addCard.close();
+  addCardModal.resetForm();
+  addCardModal.close();
 }
 
 /*------- Event Listeners --------*/
 
 editProfileButton.addEventListener("click", () => {
   profileEdit.open();
+  formValidators["profile-edit-form"].resetValidation();
   setFormInfo(selectors.editFormTitle, selectors.editFormDetails);
 });
 
 addCardButton.addEventListener("click", () => {
-  addCard.open();
+  addCardModal.open();
+  formValidators["add-card-form"].resetValidation();
 });
