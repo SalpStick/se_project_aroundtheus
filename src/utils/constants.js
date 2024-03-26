@@ -53,7 +53,7 @@ export const selectors = {
   cardLinkInput: "#add-url-input",
   profileEditForm: "#profile-edit-modal",
   profileDescription: ".profile__description",
-  profileTitle: ".profile__title",
+  profileTitle: ".profile__name",
   formSelector: ".modal__form",
   editFormTitle: "#profile-title-input",
   editFormDetails: "#profile-description-input",

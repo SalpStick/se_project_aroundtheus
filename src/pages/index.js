@@ -37,11 +37,11 @@ const profileEdit = new PopupWithForm(
 const formValidators = {};
 const enableValidation = (selectors) => {
   const formList = Array.from(
-    document.querySelectorAll(selectors.formsSelector)
+    document.querySelectorAll(selectors.formSelector)
   );
   formList.forEach((formElement) => {
     const validator = new FormValidator(validationOptions, formElement);
-    const formName = formElement.getAttribute("name");
+    const formName = formElement.getAttribute("id");
 
     formValidators[formName] = validator;
     validator.enableValidation();
