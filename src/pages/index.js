@@ -81,17 +81,17 @@ function handleImageClick(imgData) {
   imageModal.open(imgData);
 }
 
-function handleProfileFormSubmit(e) {
+function handleProfileFormSubmit(formValues) {
   e.preventDefault();
-  updateUserInfo(profileEdit.formValues);
+  updateUserInfo(formValues);
 
   profileEdit.close();
 }
 
-function handleAddCardFormSubmit(e) {
+function handleAddCardFormSubmit(formValues) {
   e.preventDefault();
 
-  const { title: name, link } = addCardModal.formValues;
+  const { title: name, link } = formValues;
 
   const cardElement = createCard({ name, link });
   cardSection.addItem(cardElement);
