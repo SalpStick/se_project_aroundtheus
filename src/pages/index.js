@@ -28,7 +28,15 @@ const addCardModal = new PopupWithForm(
   handleAddCardFormSubmit
 );
 
-const cardSection = new Section(createCard, selectors.cardSection);
+const cardSection = new Section(
+  {
+    renderer: (data) => {
+      const cardElement = createCard(data);
+      document.querySelector(selectors.cardSection).prepend(cardElement);
+    },
+  },
+  selectors.cardSection
+);
 const profileEdit = new PopupWithForm(
   selectors.profileEditForm,
   handleProfileFormSubmit
