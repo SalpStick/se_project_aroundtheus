@@ -96,9 +96,11 @@ function handleProfileFormSubmit(formValues) {
 }
 
 function handleAddCardFormSubmit(formValues) {
-  const { title: name, link } = formValues;
-
-  const cardElement = createCard({ name, link });
+  const cardElement = createCard(
+    { name: formValues.title, link: formValues.url },
+    selectors.cardTemplate,
+    handleImageClick
+  );
   cardSection.addItem(cardElement);
 
   addCardModal.close();
