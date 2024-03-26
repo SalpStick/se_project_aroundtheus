@@ -82,15 +82,12 @@ function handleImageClick(imgData) {
 }
 
 function handleProfileFormSubmit(formValues) {
-  e.preventDefault();
   updateUserInfo(formValues);
 
   profileEdit.close();
 }
 
 function handleAddCardFormSubmit(formValues) {
-  e.preventDefault();
-
   const { title: name, link } = formValues;
 
   const cardElement = createCard({ name, link });
