@@ -13,6 +13,10 @@
   height: 282px;
 }
 
+.card__image:hover {
+  cursor: pointer;
+}
+
 .card__content {
   display: flex;
   color: black;

@@ -101,7 +101,6 @@ function handleAddCardFormSubmit(formValues) {
   const cardElement = createCard({ name, link });
   cardSection.addItem(cardElement);
 
-  addCardModal.resetForm();
   addCardModal.close();
 }
 
