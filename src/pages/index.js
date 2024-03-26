@@ -85,8 +85,8 @@ function createCard(data) {
 
 /*------- Event Handlers --------*/
 
-function handleImageClick(imgData) {
-  imageModal.open(imgData);
+function handleImageClick(title, image) {
+  imageModal.open(title, image);
 }
 
 function handleProfileFormSubmit(formValues) {
