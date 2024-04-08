@@ -1,5 +1,6 @@
 import "./index.css";
 
+import Api from "../components/Api.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
@@ -17,6 +18,49 @@ import {
 
 /*------- Elements --------*/
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "6a97c619-568f-483f-898e-00f126d7744b",
+    "Content-Type": "application/json",
+  },
+});
+
+let section;
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    section = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          const sectionCard = createCard(cardData);
+          section.addItem(sectionCard);
+        },
+      },
+      ".cards__list "
+    );
+
+    section.renderItems();
+  })
+  .catch((error) => {
+    console.error("Error fetching initial cards", error);
+  });
+
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      description: userData.about,
+      avatar: userData.url,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const currentUserInfo = new UserInfo(
   selectors.profileTitle,
   selectors.profileDescription
@@ -28,15 +72,15 @@ const addCardModal = new PopupWithForm(
   handleAddCardFormSubmit
 );
 
-const cardSection = new Section(
-  {
-    renderer: (data) => {
-      const cardElement = createCard(data);
-      document.querySelector(selectors.cardSection).prepend(cardElement);
-    },
-  },
-  selectors.cardSection
-);
+// const cardSection = new Section(
+//   {
+//     renderer: (data) => {
+//       const cardElement = createCard(data);
+//       document.querySelector(selectors.cardSection).prepend(cardElement);
+//     },
+//   },
+//   selectors.cardSection
+// );
 const profileEdit = new PopupWithForm(
   selectors.profileEditForm,
   handleProfileFormSubmit
@@ -56,7 +100,7 @@ const enableValidation = (selectors) => {
   });
 };
 
-cardSection.renderItems(initialCards);
+// cardSection.renderItems(initialCards);
 enableValidation(selectors);
 profileEdit.setEventListeners();
 addCardModal.setEventListeners();
