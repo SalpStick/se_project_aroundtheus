@@ -21,7 +21,7 @@ import {
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "7ea6d231-6922-40e7-beb4-62a83d510e47",
+    authorization: "4e95a33d-e536-4fff-9ea5-7d7d422028a7",
     "Content-Type": "application/json",
   },
 });
@@ -69,7 +69,19 @@ const currentUserInfo = new UserInfo(
 const imageModal = new PopupWithImage(selectors.imageModal);
 const addCardModal = new PopupWithForm(
   selectors.addCardForm,
-  handleAddCardFormSubmit
+  handleCardFormSubmit
+);
+
+const deleteModalPopup = new PopupWithForm(
+  "#delete-modal-popup",
+  handleDeleteButton
+);
+
+deleteModalPopup.setEventListeners();
+
+const avatarModalPopup = new PopupWithForm(
+  "#modal-avatar-popup",
+  handleAvatarFormSubmit
 );
 
 // const cardSection = new Section(
@@ -105,6 +117,7 @@ enableValidation(selectors);
 profileEdit.setEventListeners();
 addCardModal.setEventListeners();
 imageModal.setEventListeners();
+avatarModalPopup.setEventListeners();
 
 function updateUserInfo({ name, description }) {
   currentUserInfo.setUserInfo({ name, description });
@@ -133,21 +146,60 @@ function handleImageClick(title, image) {
   imageModal.open(title, image);
 }
 
-function handleProfileFormSubmit(formValues) {
-  updateUserInfo(formValues);
+function handleAvatarFormSubmit(data) {
+  api
+    .updateAvatar(data)
+    .then((res) => {
+      console.log("Avatar updated successfully");
+      userInfo.setAvatar(res.avatar);
+    })
+    .catch((error) => {
+      console.error("Error updating avatar:", error);
+    });
 
-  profileEdit.close();
+  avatarModalPopup.close();
 }
 
-function handleAddCardFormSubmit(formValues) {
-  const cardElement = createCard(
-    { name: formValues.title, link: formValues.url },
-    selectors.cardTemplate,
-    handleImageClick
-  );
-  cardSection.addItem(cardElement);
+function handleProfileFormSubmit() {
+  const newName = editModalTitleInput.value;
+  const newJob = editModalSubtitleInput.value;
+  api
+    .updateProfile(newName, newJob)
+    .then((response) => {
+      console.log("Profile updated successfully:", response);
+      userInfo.setUserInfo({ name: newName, job: newJob });
+    })
+    .catch((error) => {
+      console.error("Error updating profile:", error);
+    });
+  editModalPopup.close();
+}
 
-  addCardModal.close();
+function handleCardFormSubmit() {
+  api
+    .addCard({ name: addCardTitleInput.value, link: addCardUrlInput.value })
+    .then((cardData) => {
+      // Render the new card
+      renderCard(cardData);
+      // Close the popup
+      addCardPopup.close();
+    })
+    .catch((error) => {
+      console.error("Error adding card:", error);
+    });
+}
+
+function handleDeleteButton(card) {
+  console.log("Deleting card with ID:", card);
+
+  api
+    .deleteCard(card._id)
+    .then(() => {
+      cardSection.handleDeleteCard();
+    })
+    .catch((error) => {
+      console.error("Error deleting card:", error);
+    });
 }
 
 /*------- Event Listeners --------*/
