@@ -48,8 +48,6 @@ api
     console.error("Error fetching initial cards", error);
   });
 
-// test
-
 api
   .getUserInfo()
   .then((userData) => {
