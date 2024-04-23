@@ -34,6 +34,8 @@ export const editProfileButton = document.querySelector("#profile-edit-button");
 export const profileEditForm = document.forms["#profile-edit-form"];
 export const addCardButton = document.querySelector(".profile__add-button");
 export const addCardForm = document.forms["#add-form"];
+export const avatarEditButton = document.querySelector(".profile__picture");
+export const avatarEditForm = document.forms["#profile-picture-form"];
 
 export const validationOptions = {
   formSelector: ".modal__form",
