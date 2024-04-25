@@ -5,13 +5,12 @@ export default class PopupDelete extends Popup {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._submitButton = this._popupElement.querySelector(".modal__button");
-    this._handleFormSubmit = handleFormSubmit;
   }
 
   setEventListeners() {
     this._popupForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleFormSubmit();
+      this._submitCallback();
     });
     super.setEventListeners();
   }
@@ -22,5 +21,9 @@ export default class PopupDelete extends Popup {
     } else {
       this._submitButton.textContent = "delete";
     }
+  }
+
+  setSubmitHandler(handleSubmit) {
+    this._submitCallback = handleSubmit;
   }
 }

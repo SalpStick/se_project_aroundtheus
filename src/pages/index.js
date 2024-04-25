@@ -22,7 +22,7 @@ import "./index.css";
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "90996786-0396-4a62-b39a-a13824c0c510",
+    authorization: "317093d4-9da7-4ac1-bd2d-6d651b36e683",
     "Content-Type": "application/json",
   },
 });
@@ -72,10 +72,7 @@ const addCardModal = new PopupWithForm(
   handleCardFormSubmit
 );
 
-const deleteModalPopup = new PopupDelete(
-  "#delete-modal-popup",
-  handleDeleteButton
-);
+const deleteModalPopup = new PopupDelete("#delete-modal-popup");
 
 const avatarModalPopup = new PopupWithForm(
   "#modal-avatar-popup",
@@ -143,24 +140,11 @@ function handleImageClick(title, image) {
   imageModal.open(title, image);
 }
 
-function handleDeleteClick(card) {
-  deleteModalPopup.open();
-  deleteModalPopup.setSubmitHandler(() => {
-    function makeRequest() {
-      return api.deleteCard(card.getCardId()).then(() => {
-        card.delete();
-      });
-    }
-
-    handleSubmit(makeRequest, deleteConfirmModal, "Deleting...");
-  });
-}
-
-function handleProfileFormSubmit() {
-  const newName = editModalTitleInput.value;
-  const newDescription = editModalSubtitleInput.value;
+function handleProfileFormSubmit(inputs) {
+  const newName = inputs.name;
+  const newDescription = inputs.description;
   api
-    .updateProfile(newName, newJob)
+    .updateUserInfo(newName, newDescription)
     .then((response) => {
       console.log("Profile updated successfully:", response);
       currentUserInfo.setUserInfo({
@@ -172,7 +156,7 @@ function handleProfileFormSubmit() {
     .catch((error) => {
       console.error("Error updating profile:", error);
     });
-  editModalPopup.close();
+  profileEdit.close();
 }
 
 function handleAvatarFormSubmit(data) {
@@ -195,11 +179,10 @@ function handleAvatarFormSubmit(data) {
 
 function handleCardFormSubmit(inputValues) {
   api
-    .addCard({ name: inputValues.title.value, url: inputValues.url.value })
+    .addCard({ name: inputValues.title, url: inputValues.url })
     .then((cardData) => {
-      // Render the new card
       createCard(cardData);
-      // Close the popup
+
       addCardModal.close();
     })
     .catch((error) => {
@@ -207,16 +190,28 @@ function handleCardFormSubmit(inputValues) {
     });
 }
 
-function handleDeleteButton(card) {
-  console.log("Deleting card with ID:", card);
+function handleDeleteClick(card) {
+  deleteModalPopup.open();
+  deleteModalPopup.setSubmitHandler(() => {
+    function deleteRequest() {
+      return api.deleteCard(card._id).then(() => {
+        card.handleDelete();
+        console.log("Deleting card with ID:", card);
+      });
+    }
+    handleDeleteSubmit(deleteRequest);
+  });
+}
 
-  api
-    .deleteCard(card._id)
+function handleDeleteSubmit(deleteRequest) {
+  deleteModalPopup.renderLoading(true);
+  deleteRequest()
     .then(() => {
-      card.handleDelete();
+      deleteModalPopup.close();
     })
-    .catch((error) => {
-      console.error("Error deleting card:", error);
+    .catch(console.error)
+    .finally(() => {
+      deleteModalPopup.renderLoading(false);
     });
 }
 

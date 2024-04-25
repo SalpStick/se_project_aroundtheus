@@ -28,7 +28,12 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ name, link: url }),
-    }).then(this.renderResult);
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 
   getUserInfo() {
