@@ -13,6 +13,10 @@
   margin-right: 20px;
 }
 
+.profile__picture:hover {
+  cursor: pointer;
+}
+
 .profile__content {
   display: grid;
   grid-template-areas:

@@ -22,7 +22,7 @@ import "./index.css";
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "4e95a33d-e536-4fff-9ea5-7d7d422028a7",
+    authorization: "90996786-0396-4a62-b39a-a13824c0c510",
     "Content-Type": "application/json",
   },
 });
@@ -193,14 +193,14 @@ function handleAvatarFormSubmit(data) {
   avatarModalPopup.close();
 }
 
-function handleCardFormSubmit() {
+function handleCardFormSubmit(inputValues) {
   api
-    .addCard({ name: addCardTitleInput.value, link: addCardUrlInput.value })
+    .addCard({ name: inputValues.title.value, url: inputValues.url.value })
     .then((cardData) => {
       // Render the new card
-      renderCard(cardData);
+      createCard(cardData);
       // Close the popup
-      addCardPopup.close();
+      addCardModal.close();
     })
     .catch((error) => {
       console.error("Error adding card:", error);
@@ -213,7 +213,7 @@ function handleDeleteButton(card) {
   api
     .deleteCard(card._id)
     .then(() => {
-      cardSection.handleDeleteCard();
+      card.handleDelete();
     })
     .catch((error) => {
       console.error("Error deleting card:", error);
