@@ -58,7 +58,7 @@ api
     currentUserInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
-      avatar: userData.url,
+      avatar: userData.avatar,
     });
   })
   .catch((err) => {
@@ -145,6 +145,7 @@ function handleImageClick(title, image) {
 function handleProfileFormSubmit(inputs) {
   const newName = inputs.name;
   const newDescription = inputs.description;
+  profileEdit.renderSaving(true);
   api
     .updateUserInfo(newName, newDescription)
     .then((response) => {
@@ -153,28 +154,33 @@ function handleProfileFormSubmit(inputs) {
         name: newName,
         description: newDescription,
       });
+
+      profileEdit.close();
     })
     .catch((error) => {
       console.error("Error updating profile:", error);
     });
-  profileEdit.close();
+  profileEdit.renderSaving(false);
 }
 
 function handleAvatarFormSubmit(data) {
+  avatarModalPopup.renderSaving(true);
   api
     .updateAvatar(data)
     .then((res) => {
       console.log("Avatar updated successfully");
       currentUserInfo.setAvatar(res.avatar);
+
+      avatarModalPopup.close();
     })
     .catch((error) => {
       console.error("Error updating avatar:", error);
     });
-
-  avatarModalPopup.close();
+  avatarModalPopup.renderSaving(false);
 }
 
 function handleCardFormSubmit(inputValues) {
+  addCardModal.renderSaving(true);
   api
     .addCard({ name: inputValues.title, url: inputValues.url })
     .then((cardData) => {
@@ -187,16 +193,20 @@ function handleCardFormSubmit(inputValues) {
     .catch((error) => {
       console.error("Error adding card:", error);
     });
+  addCardModal.renderSaving(false);
 }
 
 function handleDeleteClick(card) {
   deleteModalPopup.open();
   deleteModalPopup.setSubmitHandler(() => {
     function deleteRequest() {
-      return api.deleteCard(card._id).then(() => {
-        card.handleDelete();
-        console.log("Deleting card:", card);
-      });
+      return api
+        .deleteCard(card._id)
+        .then(() => {
+          card.handleDelete();
+          console.log("Deleting card:", card);
+        })
+        .catch(console.error);
     }
     handleDeleteSubmit(deleteRequest);
   });
@@ -208,23 +218,32 @@ function handleDeleteSubmit(deleteRequest) {
     .then(() => {
       deleteModalPopup.close();
     })
-    .catch(console.error)
-    .finally(() => {
-      deleteModalPopup.renderLoading(false);
-    });
+    .catch(console.error);
+
+  deleteModalPopup.renderLoading(false);
 }
 
-function handleLikeClick(id) {
+function handleLikeClick(card) {
   api
-    .likeCard(id)
-    .then(console.log(id + " has been liked"))
+    .likeCard(card._id)
+    .then(
+      console.log(() => {
+        card.toggleLikeBtn();
+        card._id + " has been liked";
+      })
+    )
     .catch(console.error);
 }
 
-function handleDislikeClick(id) {
+function handleDislikeClick(card) {
   api
-    .dislikeCard(id)
-    .then(console.log(id + " has been disliked"))
+    .dislikeCard(card._id)
+    .then(
+      console.log(() => {
+        card.toggleLikeBtn();
+        card._id + " has been disliked";
+      })
+    )
     .catch(console.error);
 }
 

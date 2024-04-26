@@ -70,13 +70,13 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    }).then((data) => data);
+    }).then(this.renderResult);
   }
 
   dislikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((data) => data);
+    }).then(this.renderResult);
   }
 }

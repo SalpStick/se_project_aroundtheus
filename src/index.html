@@ -22,11 +22,18 @@
       </header>
       <main class="content">
         <section class="profile page__section">
+          <div class="profile__image_container">
           <img
             src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Avatar Picture"
             class="profile__picture"
           />
+          <img
+              src="<%=require('./images/edit-picture.svg')%>"
+              class="profile__picture-edit"
+              alt="edit-icon"
+            />
+          </div>
           <div class="profile__content">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button
@@ -106,7 +113,7 @@
               placeholder="Image Url"
               required
             />
-            <span class="modal__error-message" id="avatar-error"></span>
+            <span id="avatar-error" class="modal__error modal__error_disabled"></span>
           </label>
           <button type="submit" class="modal__button">Save</button>
         </form>
