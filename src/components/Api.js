@@ -51,11 +51,11 @@ export default class Api {
     });
   }
 
-  updateAvatar({ url }) {
+  updateAvatar(url) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar: url }),
+      body: JSON.stringify({ avatar: url.avatar }),
     }).then(this.renderResult);
   }
 
@@ -64,5 +64,19 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then(this.renderResult);
+  }
+
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((data) => data);
+  }
+
+  dislikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((data) => data);
   }
 }

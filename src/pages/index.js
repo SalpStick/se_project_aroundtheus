@@ -26,14 +26,14 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-let section;
 
 const currentUserInfo = new UserInfo(
   selectors.profileTitle,
   selectors.profileDescription,
-  document.querySelector(".profile__picture")
+  ".profile__picture"
 );
 
+let section;
 api
   .getInitialCards()
   .then((cards) => {
@@ -129,7 +129,9 @@ function createCard(data) {
     { data },
     selectors.cardTemplate,
     handleImageClick,
-    handleDeleteClick
+    handleDeleteClick,
+    handleLikeClick,
+    handleDislikeClick
   );
   return cardElement.getView();
 }
@@ -150,7 +152,6 @@ function handleProfileFormSubmit(inputs) {
       currentUserInfo.setUserInfo({
         name: newName,
         description: newDescription,
-        avatar: currentUserInfo._avatar,
       });
     })
     .catch((error) => {
@@ -164,11 +165,7 @@ function handleAvatarFormSubmit(data) {
     .updateAvatar(data)
     .then((res) => {
       console.log("Avatar updated successfully");
-      currentUserInfo.setUserInfo({
-        name: currentUserInfo._name,
-        description: currentUserInfo._description,
-        avatar: res.avatar,
-      });
+      currentUserInfo.setAvatar(res.avatar);
     })
     .catch((error) => {
       console.error("Error updating avatar:", error);
@@ -183,6 +180,8 @@ function handleCardFormSubmit(inputValues) {
     .then((cardData) => {
       createCard(cardData);
 
+      section.renderCard(cardData);
+
       addCardModal.close();
     })
     .catch((error) => {
@@ -196,7 +195,7 @@ function handleDeleteClick(card) {
     function deleteRequest() {
       return api.deleteCard(card._id).then(() => {
         card.handleDelete();
-        console.log("Deleting card with ID:", card);
+        console.log("Deleting card:", card);
       });
     }
     handleDeleteSubmit(deleteRequest);
@@ -213,6 +212,20 @@ function handleDeleteSubmit(deleteRequest) {
     .finally(() => {
       deleteModalPopup.renderLoading(false);
     });
+}
+
+function handleLikeClick(id) {
+  api
+    .likeCard(id)
+    .then(console.log(id + " has been liked"))
+    .catch(console.error);
+}
+
+function handleDislikeClick(id) {
+  api
+    .dislikeCard(id)
+    .then(console.log(id + " has been disliked"))
+    .catch(console.error);
 }
 
 /*------- Event Listeners --------*/
