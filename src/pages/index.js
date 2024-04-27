@@ -8,7 +8,6 @@ import PopupDelete from "../components/PopupDelete.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import {
-  initialCards,
   validationOptions,
   selectors,
   editProfileButton,
@@ -58,8 +57,8 @@ api
     currentUserInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
-      avatar: userData.avatar,
     });
+    currentUserInfo.setAvatar(userData.avatar);
   })
   .catch((err) => {
     console.log(err);
@@ -226,24 +225,14 @@ function handleDeleteSubmit(deleteRequest) {
 function handleLikeClick(card) {
   api
     .likeCard(card._id)
-    .then(
-      console.log(() => {
-        card.toggleLikeBtn();
-        card._id + " has been liked";
-      })
-    )
+    .then(card.toggleLikeBtn(), console.log(card._id + " has been liked"))
     .catch(console.error);
 }
 
 function handleDislikeClick(card) {
   api
     .dislikeCard(card._id)
-    .then(
-      console.log(() => {
-        card.toggleLikeBtn();
-        card._id + " has been disliked";
-      })
-    )
+    .then(card.toggleLikeBtn(), console.log(card._id + " has been disliked"))
     .catch(console.error);
 }
 

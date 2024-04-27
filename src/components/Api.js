@@ -28,12 +28,7 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ name, link: url }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this.renderResult);
   }
 
   getUserInfo() {
@@ -48,7 +43,7 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ name: name, about: about }),
-    });
+    }).then(this.renderResult);
   }
 
   updateAvatar(url) {

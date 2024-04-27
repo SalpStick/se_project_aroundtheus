@@ -96,25 +96,23 @@
     <!-- Profile picture modal -->
     <div class="modal" id="modal-avatar-popup">
       <div class="modal__container">
-        <button
-          type="button"
-          title="modal__close"
-          class="modal__close"
-          id="profile-picture-close-button"
-        ></button>
         <h2 class="modal__heading">Change profile picture</h2>
+          <button
+            type="button"
+            title="modal__close"
+            class="modal__close"
+            id="profile-picture-close-button"
+         ></button>
         <form class="modal__form" id="profile-picture-form" novalidate>
-          <label class="modal__label">
-            <input
-              type="url"
-              id="avatar"
-              class="modal__avatar modal__input"
-              name="avatar"
-              placeholder="Image Url"
-              required
+          <input
+            type="url"
+            id="avatar"
+            class="modal__avatar modal__input"
+            name="avatar"
+            placeholder="Image Url"
+            required
             />
             <span id="avatar-error" class="modal__error modal__error_disabled"></span>
-          </label>
           <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
