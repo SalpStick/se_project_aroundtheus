@@ -4,7 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupDelete from "../components/PopupDelete.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import {
@@ -71,7 +71,7 @@ const addCardModal = new PopupWithForm(
   handleCardFormSubmit
 );
 
-const deleteModalPopup = new PopupDelete("#delete-modal-popup");
+const deleteModalPopup = new PopupWithConfirmation("#delete-modal-popup");
 
 const avatarModalPopup = new PopupWithForm(
   "#modal-avatar-popup",
@@ -158,8 +158,10 @@ function handleProfileFormSubmit(inputs) {
     })
     .catch((error) => {
       console.error("Error updating profile:", error);
+    })
+    .finally(() => {
+      profileEdit.renderSaving(false);
     });
-  profileEdit.renderSaving(false);
 }
 
 function handleAvatarFormSubmit(data) {
@@ -174,8 +176,10 @@ function handleAvatarFormSubmit(data) {
     })
     .catch((error) => {
       console.error("Error updating avatar:", error);
+    })
+    .finally(() => {
+      avatarModalPopup.renderSaving(false);
     });
-  avatarModalPopup.renderSaving(false);
 }
 
 function handleCardFormSubmit(inputValues) {
@@ -191,49 +195,57 @@ function handleCardFormSubmit(inputValues) {
     })
     .catch((error) => {
       console.error("Error adding card:", error);
+    })
+    .finally(() => {
+      addCardModal.renderSaving(false);
     });
-  addCardModal.renderSaving(false);
 }
 
 function handleDeleteClick(card) {
   deleteModalPopup.open();
   deleteModalPopup.setSubmitHandler(() => {
-    function deleteRequest() {
-      return api
-        .deleteCard(card._id)
-        .then(() => {
-          card.handleDelete();
-          console.log("Deleting card:", card);
-        })
-        .catch(console.error);
-    }
-    handleDeleteSubmit(deleteRequest);
+    deleteModalPopup.renderLoading(true, "Deleting...");
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card.handleDelete();
+        console.log("Deleting card:", card);
+        deleteModalPopup.close();
+      })
+      .catch(console.error)
+      .finally(() => {
+        deleteModalPopup.renderLoading(false, "");
+      });
   });
 }
 
-function handleDeleteSubmit(deleteRequest) {
-  deleteModalPopup.renderLoading(true);
-  deleteRequest()
-    .then(() => {
-      deleteModalPopup.close();
-    })
-    .catch(console.error);
+// function handleDeleteSubmit(deleteRequest) {
+//   deleteModalPopup.renderLoading(true);
+//   deleteRequest()
+//     .then(() => {
+//       deleteModalPopup.close();
+//     })
+//     .catch(console.error);
 
-  deleteModalPopup.renderLoading(false);
-}
+//   deleteModalPopup.renderLoading(false);
+// }
 
 function handleLikeClick(card) {
   api
     .likeCard(card._id)
-    .then(card.toggleLikeBtn(), console.log(card._id + " has been liked"))
+    .then(() => {
+      card.toggleLikeBtn();
+      console.log(card._id + " has been liked");
+    })
     .catch(console.error);
 }
 
 function handleDislikeClick(card) {
-  api
-    .dislikeCard(card._id)
-    .then(card.toggleLikeBtn(), console.log(card._id + " has been disliked"))
-    .catch(console.error);
+  api.dislikeCard(card._id);
+  then(() => {
+    card.toggleLikeBtn();
+    console.log(card._id + " has been disliked");
+  }).catch(console.error);
 }
 
 /*------- Event Listeners --------*/

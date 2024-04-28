@@ -1,10 +1,11 @@
 import Popup from "./Popup.js";
 
-export default class PopupDelete extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
+export default class PopupWithConfirmation extends Popup {
+  constructor(popupSelector) {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._submitButton = this._popupElement.querySelector(".modal__button");
+    this._submitButtonText = this._submitButton.textContent;
   }
 
   setEventListeners() {
@@ -15,11 +16,11 @@ export default class PopupDelete extends Popup {
     super.setEventListeners();
   }
 
-  renderLoading(loading) {
+  renderLoading(loading, phrase) {
     if (loading) {
-      this._submitButton.textContent = "Deleting...";
+      this._submitButton.textContent = phrase;
     } else {
-      this._submitButton.textContent = "delete";
+      this._submitButton.textContent = this._submitButtonText;
     }
   }
 
