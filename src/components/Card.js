@@ -61,8 +61,7 @@ export default class Card {
   }
 
   _handleLikeBtn() {
-    this._isLiked = !this._isLiked;
-    if (this._isLiked) {
+    if (!this._isLiked) {
       this._handleLikeClick(this);
     } else {
       this._handleDislikeClick(this);
@@ -71,6 +70,7 @@ export default class Card {
 
   toggleLikeBtn() {
     this._likeButton.classList.toggle("card__heart_active");
+    this._isLiked = !this._isLiked;
   }
 
   handleDelete() {
