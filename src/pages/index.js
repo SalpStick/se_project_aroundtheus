@@ -263,5 +263,5 @@ addCardButton.addEventListener("click", () => {
 
 avatarEditButton.addEventListener("click", () => {
   avatarModalPopup.open();
-  formValidators["profile-picture-form"];
+  formValidators["profile-picture-form"].resetValidation();
 });
