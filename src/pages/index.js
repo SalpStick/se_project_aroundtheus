@@ -241,11 +241,13 @@ function handleLikeClick(card) {
 }
 
 function handleDislikeClick(card) {
-  api.dislikeCard(card._id);
-  then(() => {
-    card.toggleLikeBtn();
-    console.log(card._id + " has been disliked");
-  }).catch(console.error);
+  api
+    .dislikeCard(card._id)
+    .then(() => {
+      card.toggleLikeBtn();
+      console.log(card._id + " has been disliked");
+    })
+    .catch(console.error);
 }
 
 /*------- Event Listeners --------*/

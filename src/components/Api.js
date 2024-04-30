@@ -17,9 +17,6 @@ export default class Api {
   }
 
   _request(url, options) {
-    console.log(url);
-    console.log(options);
-    console.log(fetch(url, options));
     return fetch(url, options).then(this.renderResult);
   }
 
@@ -62,21 +59,21 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    return this._request(`${this._url}/cards/${cardId}`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     });
   }
 
   likeCard(cardId) {
-    return this._request(`${this._url}/cards/${cardId}/likes`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     });
   }
 
   dislikeCard(cardId) {
-    return this._request(`${this._url}/cards/${cardId}/likes`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     });
